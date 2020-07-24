@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "trash-it:block/trash_can"
+      }
+    ]
+  }
+}

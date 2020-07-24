@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "trash-it",
+  "version": "${version}",
+  "name": "Trash It",
+  "description": "Trash your stuff in this fashionable trash can!",
+  "authors": [
+    "Draylar"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/trash-it/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "draylar.trashit.TrashIt"
+    ],
+    "client": [
+      "draylar.trashit.TrashItClient"
+    ]
+  },
+  "mixins": [
+    "trash-it.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.9.0+build.204",
+    "fabric": "*",
+    "minecraft": "1.16.1"
+  }
+}
