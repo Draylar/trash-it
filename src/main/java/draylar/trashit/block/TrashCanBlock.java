@@ -2,11 +2,11 @@ package draylar.trashit.block;
 
 import draylar.trashit.ui.TrashCanScreenHandler;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.SidedInventory;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -15,12 +15,14 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
-public class TrashCanBlock extends Block {
+public class TrashCanBlock extends Block implements InventoryProvider {
 
     private static final VoxelShape SHAPE;
 
@@ -52,5 +54,29 @@ public class TrashCanBlock extends Block {
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
+    }
+
+    @Override
+    public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
+        return new DummyInventory();
+    }
+
+    static class DummyInventory extends SimpleInventory implements SidedInventory {
+
+        public DummyInventory() {
+            super(1);
+        }
+
+        public int[] getAvailableSlots(Direction side) {
+            return new int[1];
+        }
+
+        public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+            return true;
+        }
+
+        public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+            return false;
+        }
     }
 }
