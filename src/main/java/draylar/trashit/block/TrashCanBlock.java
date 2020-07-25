@@ -33,7 +33,7 @@ public class TrashCanBlock extends Block implements InventoryProvider {
     }
 
     public TrashCanBlock() {
-        super(FabricBlockSettings.of(Material.METAL).nonOpaque());
+        super(FabricBlockSettings.of(Material.METAL).hardness(2.0f).nonOpaque());
     }
 
     @Override
